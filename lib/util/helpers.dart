@@ -1,6 +1,6 @@
 extension DoubleHelpers on double {
   String toCommaString() {
-    String text = this.toStringAsFixed(0);
+    String text = this.toStringAsFixed(1).split('.')[0];
     String valStr = this.toStringAsFixed(2).toString();
     String beforeDot = valStr.substring(0, valStr.length - 3);
 

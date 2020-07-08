@@ -147,7 +147,7 @@ class _MainPageState extends State<MainPage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Text(
-                                      '¥$totalStr',
+                                      '${total < 0 ? '-' : ''}¥$totalStr',
                                       style: TextStyle(fontSize: 64, color: foregroundColor),
                                       textScaleFactor: mainSizeFactor,
                                     )
@@ -260,6 +260,7 @@ class _MainPageState extends State<MainPage> {
     if (displayType == DisplayType.single) {
       transactions.sort((a, b) => b.createdDate.compareTo(a.createdDate));
       return transactions.map((e) {
+
         return Dismissible(
           key: UniqueKey(),
           onDismissed: (direction) {
@@ -310,7 +311,7 @@ class _MainPageState extends State<MainPage> {
                   style: TextStyle(color: subForegroundColor),
                 ),
                 Text(
-                  '${e.createdDate.year}年${e.createdDate.month}月${e.createdDate.day}日 ${e.createdDate.toString().substring(12, 16)}',
+                  '${e.createdDate.year}年${e.createdDate.month}月${e.createdDate.day}日 ${e.createdDate.toString().substring(11, 16)}',
                   style: TextStyle(color: subForegroundColor),
                 ),
               ],
@@ -655,6 +656,7 @@ class _MainPageState extends State<MainPage> {
                           child: Text('入账', style: TextStyle(fontSize: 24, fontFamily: 'noto')),
                         ),
                         onPressed: () {
+                          print("the text editing value is ${double.parse(textEditingController.text.replaceAll(',', ''))}");
                           var t = Transaction.create(amount: double.parse(textEditingController.text.replaceAll(',', '')), transactionType: type);
                           BillBloc.instance.addTransaction(t);
                           Navigator.pop(context);

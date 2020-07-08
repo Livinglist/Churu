@@ -10,6 +10,10 @@ class CurrencyInputFormatter extends TextInputFormatter {
     bool withDot = false;
     String afterDot;
 
+    if (newValue.text.isEmpty) return TextEditingValue(text: '', selection: TextSelection.fromPosition(TextPosition(offset: -1)));
+
+    if (newValue.text.lastIndexOf('0') != newValue.text.indexOf('0')) return oldValue;
+
     if (newValue.text.contains('.')) {
       if (newValue.text.lastIndexOf('.') != newValue.text.indexOf('.')) {
         print('A1 the final value is ${oldValue.text}');
@@ -46,7 +50,8 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
     print("B the final value is $text the afterdot is $afterDot");
 
-    TextEditingValue textEditingValue = TextEditingValue(text: text, selection: TextSelection.fromPosition(TextPosition(offset: text.length)));
+    TextEditingValue textEditingValue =
+        TextEditingValue(text: text, selection: TextSelection.fromPosition(TextPosition(offset: text.isEmpty ? -1 : text.length)));
 
     return textEditingValue;
   }
