@@ -20,12 +20,12 @@ class BillBloc {
     Repository.instance.getAllTransactions().then((value) {
       _transactions = value;
 
-      _transactions.add(Transaction.debug(date: DateTime(2020, 1, 1), amount: 102));
-      _transactions.add(Transaction.debug(date: DateTime(2020, 1, 2), amount: -1));
-      _transactions.add(Transaction.debug(date: DateTime(2020, 2, 3), amount: 203));
-      _transactions.add(Transaction.debug(date: DateTime(2019, 9, 1), amount: 2019));
-      _transactions.add(Transaction.debug(date: DateTime(2018, 8, 1), amount: -2018));
-      _transactions.add(Transaction.debug(date: DateTime(2016, 6, 1), amount: 2016));
+//      _transactions.add(Transaction.debug(date: DateTime(2020, 1, 1), amount: 102));
+//      _transactions.add(Transaction.debug(date: DateTime(2020, 1, 2), amount: -1));
+//      _transactions.add(Transaction.debug(date: DateTime(2020, 2, 3), amount: 203));
+//      _transactions.add(Transaction.debug(date: DateTime(2019, 9, 1), amount: 2019));
+//      _transactions.add(Transaction.debug(date: DateTime(2018, 8, 1), amount: -2018));
+//      _transactions.add(Transaction.debug(date: DateTime(2016, 6, 1), amount: 2016));
 
       _billFetcher.sink.add(_transactions.toList());
     });
