@@ -12,7 +12,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
     if (newValue.text.isEmpty) return TextEditingValue(text: '', selection: TextSelection.fromPosition(TextPosition(offset: -1)));
 
-    if (newValue.text.lastIndexOf('0') != newValue.text.indexOf('0')) return oldValue;
+    if (newValue.text.length == 2 && newValue.text[0] == '0' && newValue.text[1] == '0') return oldValue;
 
     if (newValue.text.contains('.')) {
       if (newValue.text.lastIndexOf('.') != newValue.text.indexOf('.')) {

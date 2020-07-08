@@ -589,7 +589,7 @@ class _MainPageState extends State<MainPage> {
       barrierLabel: "Barrier",
       barrierDismissible: true,
       barrierColor: Colors.black.withOpacity(0.5),
-      transitionDuration: Duration(milliseconds: 700),
+      transitionDuration: Duration(milliseconds: 300),
       context: context,
       pageBuilder: (_, __, ___) {
         return Align(
@@ -611,6 +611,7 @@ class _MainPageState extends State<MainPage> {
                     autofocus: true,
                     textAlign: TextAlign.center,
                     prefix: Material(
+                        color: Colors.white,
                         child: Text(
                       '¥',
                       style: TextStyle(fontSize: 36),
@@ -630,7 +631,7 @@ class _MainPageState extends State<MainPage> {
                     child: Container(
                       height: 164,
                       child: CupertinoPicker(
-                        itemExtent: 28,
+                        itemExtent:24,
                         magnification: 1.4,
                         onSelectedItemChanged: (index) {
                           type = TransactionType.values.elementAt(index);
@@ -639,7 +640,7 @@ class _MainPageState extends State<MainPage> {
                             .map(
                               (e) => Text(
                                 localizations.transactionTypeToString(e),
-                                style: TextStyle(fontFamily: 'noto'),
+                                style: TextStyle(fontFamily: 'noto', fontSize: 14),
                               ),
                             )
                             .toList(),
@@ -686,7 +687,7 @@ class _MainPageState extends State<MainPage> {
       barrierLabel: "Barrier",
       barrierDismissible: true,
       barrierColor: Colors.black.withOpacity(0.5),
-      transitionDuration: Duration(milliseconds: 700),
+      transitionDuration: Duration(milliseconds: 300),
       context: context,
       pageBuilder: (_, __, ___) {
         return Align(
@@ -708,6 +709,7 @@ class _MainPageState extends State<MainPage> {
                     autofocus: true,
                     textAlign: TextAlign.center,
                     prefix: Material(
+                      color: Colors.white,
                         child: Text(
                       '¥',
                       style: TextStyle(fontSize: 36),
@@ -716,6 +718,7 @@ class _MainPageState extends State<MainPage> {
                     smartQuotesType: SmartQuotesType.enabled,
                     decoration: BoxDecoration(color: Colors.transparent),
                     keyboardType: TextInputType.numberWithOptions(decimal: true),
+                    keyboardAppearance: MediaQuery.of(context).platformBrightness,
                     maxLength: 16,
                     maxLengthEnforced: true,
                     inputFormatters: [CurrencyInputFormatter()],
@@ -726,7 +729,7 @@ class _MainPageState extends State<MainPage> {
                     child: Container(
                       height: 164,
                       child: CupertinoPicker(
-                        itemExtent: 28,
+                        itemExtent: 24,
                         magnification: 1.4,
                         onSelectedItemChanged: (index) {
                           type = TransactionType.values.elementAt(index);
@@ -735,7 +738,7 @@ class _MainPageState extends State<MainPage> {
                             .map(
                               (e) => Text(
                                 localizations.transactionTypeToString(e),
-                                style: TextStyle(fontFamily: 'noto'),
+                                style: TextStyle(fontFamily: 'noto', fontSize: 14),
                               ),
                             )
                             .toList(),
