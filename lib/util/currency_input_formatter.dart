@@ -48,7 +48,9 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
     //text += withDot ? '$afterDot' : '';
 
-    print("B the final value is $text the afterdot is $afterDot");
+    print("B the final value is $text; the afterdot is $afterDot; the withdot is $withDot");
+
+    if(withDot) text += '.' + afterDot;
 
     TextEditingValue textEditingValue =
         TextEditingValue(text: text, selection: TextSelection.fromPosition(TextPosition(offset: text.isEmpty ? -1 : text.length)));

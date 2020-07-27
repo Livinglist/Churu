@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:app_review/app_review.dart';
+
 import 'package:innout/bloc/bill_bloc.dart';
 import 'package:innout/ui/type_detail_page.dart';
 
@@ -37,6 +39,8 @@ class _MainPageState extends State<MainPage> {
     });
 
     BillBloc.instance.init();
+
+    AppReview.requestReview;
   }
 
   @override
@@ -260,7 +264,6 @@ class _MainPageState extends State<MainPage> {
     if (displayType == DisplayType.single) {
       transactions.sort((a, b) => b.createdDate.compareTo(a.createdDate));
       return transactions.map((e) {
-
         return Dismissible(
           key: UniqueKey(),
           onDismissed: (direction) {
@@ -613,9 +616,9 @@ class _MainPageState extends State<MainPage> {
                     prefix: Material(
                         color: Colors.white,
                         child: Text(
-                      '¥',
-                      style: TextStyle(fontSize: 36),
-                    )),
+                          '¥',
+                          style: TextStyle(fontSize: 36),
+                        )),
                     style: TextStyle(fontSize: 36, fontFamily: 'noto'),
                     smartQuotesType: SmartQuotesType.enabled,
                     decoration: BoxDecoration(color: Colors.transparent),
@@ -631,7 +634,7 @@ class _MainPageState extends State<MainPage> {
                     child: Container(
                       height: 164,
                       child: CupertinoPicker(
-                        itemExtent:24,
+                        itemExtent: 24,
                         magnification: 1.4,
                         onSelectedItemChanged: (index) {
                           type = TransactionType.values.elementAt(index);
@@ -709,11 +712,11 @@ class _MainPageState extends State<MainPage> {
                     autofocus: true,
                     textAlign: TextAlign.center,
                     prefix: Material(
-                      color: Colors.white,
+                        color: Colors.white,
                         child: Text(
-                      '¥',
-                      style: TextStyle(fontSize: 36),
-                    )),
+                          '¥',
+                          style: TextStyle(fontSize: 36),
+                        )),
                     style: TextStyle(fontSize: 36, fontFamily: 'noto'),
                     smartQuotesType: SmartQuotesType.enabled,
                     decoration: BoxDecoration(color: Colors.transparent),
