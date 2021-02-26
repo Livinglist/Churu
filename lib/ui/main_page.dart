@@ -11,6 +11,8 @@ import 'package:innout/ui/type_detail_page.dart';
 import 'package:innout/util/currency_input_formatter.dart';
 import 'package:innout/util/helpers.dart';
 
+import 'components/spring_curve.dart';
+
 const String noto = 'noto';
 
 enum DisplayType { single, day, month, year, category }
@@ -31,12 +33,6 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Timer(Duration(milliseconds: 300), () {
-        scrollController.animateTo(240, duration: Duration(milliseconds: 300), curve: Curves.fastOutSlowIn);
-      });
-    });
 
     BillBloc.instance.init();
 
@@ -678,7 +674,7 @@ class _MainPageState extends State<MainPage> {
       },
       transitionBuilder: (_, anim, __, child) {
         return SlideTransition(
-          position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
+          position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(CurvedAnimation(parent: anim, curve: SpringCurve.underDamped)),
           child: child,
         );
       },
@@ -775,7 +771,7 @@ class _MainPageState extends State<MainPage> {
       },
       transitionBuilder: (_, anim, __, child) {
         return SlideTransition(
-          position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim),
+          position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(CurvedAnimation(parent: anim, curve: SpringCurve.underDamped)),
           child: child,
         );
       },
