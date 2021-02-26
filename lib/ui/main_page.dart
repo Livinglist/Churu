@@ -5,17 +5,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:app_review/app_review.dart';
 
+import 'package:innout/model/display_type.dart';
 import 'package:innout/bloc/bill_bloc.dart';
+import 'package:innout/ui/components/type_picker.dart';
 import 'package:innout/ui/type_detail_page.dart';
 
 import 'package:innout/util/currency_input_formatter.dart';
 import 'package:innout/util/helpers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'components/spring_curve.dart';
 
 const String noto = 'noto';
-
-enum DisplayType { single, day, month, year, category }
 
 class MainPage extends StatefulWidget {
   @override
@@ -212,42 +213,29 @@ class _MainPageState extends State<MainPage> {
                         ),
                         color: Colors.white,
                         shape: CircleBorder()),
-                    RaisedButton(
-                        onPressed: () {
-                          setState(() {
-                            switch (displayType) {
-                              case DisplayType.single:
-                                displayType = DisplayType.day;
-                                buttonStr = '月';
-                                break;
-                              case DisplayType.day:
-                                displayType = DisplayType.month;
-                                buttonStr = '年';
+                    FutureBuilder(
+                      future: getCurrentPage(),
+                      builder: (_, AsyncSnapshot<int> snapshot) {
+                        if(snapshot.hasData) {
+                          var curPage = snapshot.data;
 
-                                break;
-                              case DisplayType.month:
-                                displayType = DisplayType.year;
-                                buttonStr = '类';
-                                break;
-                              case DisplayType.year:
-                                displayType = DisplayType.category;
-                                buttonStr = '次';
-                                break;
-                              case DisplayType.category:
-                                displayType = DisplayType.single;
-                                buttonStr = '日';
-                                break;
-                              default:
-                                throw Exception('Unmatched displaytype');
-                            }
-                          });
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.all(12),
-                          child: Text(buttonStr, style: TextStyle(fontFamily: 'noto', fontSize: 24, fontWeight: FontWeight.bold)),
-                        ),
-                        color: Colors.white,
-                        shape: CircleBorder()),
+                          return TypePicker(initialPage: curPage, onTypeChanged: (type){
+                            setState(() {
+                              this.displayType = type;
+                            });
+                          },);
+                        }
+
+                        return RaisedButton(
+                            child: Padding(
+                                padding: EdgeInsets.all(12),
+                                child: Container(
+                                    height: 36,
+                                    width: 36)),
+                            color: Colors.white,
+                            shape: CircleBorder());
+                      }
+                    )
                   ],
                 ),
               ),
@@ -776,5 +764,9 @@ class _MainPageState extends State<MainPage> {
         );
       },
     );
+  }
+
+  Future<int> getCurrentPage() {
+    return SharedPreferences.getInstance().then((value) => value.getInt("lastVisitedPage") ?? 0);
   }
 }

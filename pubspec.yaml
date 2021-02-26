@@ -28,6 +28,7 @@ dependencies:
   rxdart: 0.23.1
   uuid: 2.2.0
   sqflite: ^1.2.0
+  shared_preferences: 0.5.12+4
   path_provider: 1.6.0
   app_review: 1.1.2
 
