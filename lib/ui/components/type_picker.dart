@@ -43,7 +43,7 @@ class _TypePickerState extends State<TypePicker> {
             _pageController.jumpToPage(0);
           } else {
             _pageController.nextPage(
-                duration: Duration(milliseconds: 100), curve: Curves.bounceIn);
+                duration: Duration(milliseconds: 150), curve: Curves.bounceIn);
           }
         },
         child: Padding(
