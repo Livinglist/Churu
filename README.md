@@ -3,6 +3,7 @@
 ![iOS](https://img.shields.io/badge/iOS-13%20-blue)
 [![App Store](https://img.shields.io/itunes/v/1522619720?label=App%20Store)](https://apps.apple.com/us/app/出入-简易记账/id1522619720)
 [![App Store](https://img.shields.io/badge/Price-Free-orange)](https://img.shields.io/badge/Price-Free-orange)
+[![Visits Badge](https://badges.pufler.dev/visits/livinglist/churu)](https://badges.pufler.dev)
 
 出入是一款用Flutter开发的简约记账应用。
 
