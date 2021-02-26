@@ -6,13 +6,26 @@
 
 出入是一款用Flutter开发的简约记账应用。
 
+![Screen Shot 2021-02-25 at 10 19 07 PM](https://user-images.githubusercontent.com/7277662/109263293-e0d97400-77b7-11eb-9a6a-70537141fdbf.png)
+![Screen Shot 2021-02-25 at 10 19 05 PM](https://user-images.githubusercontent.com/7277662/109263297-e20aa100-77b7-11eb-9204-5f061441a471.png)
+![Screen Shot 2021-02-25 at 10 19 03 PM](https://user-images.githubusercontent.com/7277662/109263299-e33bce00-77b7-11eb-87dd-2ed445dfe076.png)
+![Screen Shot 2021-02-25 at 10 19 00 PM](https://user-images.githubusercontent.com/7277662/109263304-e3d46480-77b7-11eb-907e-cd7d04bf334a.png)
+![Screen Shot 2021-02-25 at 10 18 57 PM](https://user-images.githubusercontent.com/7277662/109263306-e46cfb00-77b7-11eb-8f2a-3a42fd85ac5a.png)
+![Screen Shot 2021-02-25 at 10 18 46 PM](https://user-images.githubusercontent.com/7277662/109263309-e46cfb00-77b7-11eb-9b37-7cf73ecce2b6.png)
+![Screen Shot 2021-02-25 at 10 18 43 PM](https://user-images.githubusercontent.com/7277662/109263311-e5059180-77b7-11eb-9226-4a0fe85dba93.png)
+![Screen Shot 2021-02-25 at 10 18 41 PM](https://user-images.githubusercontent.com/7277662/109263312-e5059180-77b7-11eb-90b7-5499de64e099.png)
+![Screen Shot 2021-02-25 at 10 18 37 PM](https://user-images.githubusercontent.com/7277662/109263314-e59e2800-77b7-11eb-8e83-fa98393b6a0a.png)
+![Screen Shot 2021-02-25 at 10 18 34 PM](https://user-images.githubusercontent.com/7277662/109263317-e636be80-77b7-11eb-807c-d1be0fce79bd.png)
+
 <p align="center">
-  <img width="280" alt="Screen Shot 2020-03-03 at 1 22 57 PM" src="https://user-images.githubusercontent.com/7277662/108801611-0ca3f200-754b-11eb-8688-65562559e7cd.png"> 
-  <img width="280" alt="Screen Shot 2020-08-20 at 6 16 26 PM" src="https://user-images.githubusercontent.com/7277662/108801614-0e6db580-754b-11eb-84f7-b69e38885073.png">
-<img width="280" alt="Screen Shot 2020-08-20 at 6 16 43 PM" src="https://user-images.githubusercontent.com/7277662/108801616-0f064c00-754b-11eb-912d-ee91bc009da9.png">
-  <img width="280" alt="Screen Shot 2020-03-03 at 1 25 18 PM" src="https://user-images.githubusercontent.com/7277662/108801619-10377900-754b-11eb-959e-e0443f38d370.png">
-<img width="280" alt="Screen Shot 2020-08-20 at 6 21 48 PM" src="https://user-images.githubusercontent.com/7277662/108801620-10377900-754b-11eb-8b30-95e3a2b238db.png">
-<img width="280" alt="Screen Shot 2020-08-20 at 6 16 50 PM" src="https://user-images.githubusercontent.com/7277662/108801621-10d00f80-754b-11eb-8cbe-0c6786c44616.png">
-<img width="280" alt="Screen Shot 2020-04-19 at 5 59 00 PM" src="https://user-images.githubusercontent.com/7277662/108801622-1168a600-754b-11eb-933d-6ebfa037783a.png">
-<img width="280" alt="Screen Shot 2020-04-20 at 8 01 24 PM" src="https://user-images.githubusercontent.com/7277662/108801624-1168a600-754b-11eb-8145-0f773674076d.png">
+  <img width="280" alt="Screen Shot 2020-03-03 at 1 22 57 PM" src="https://user-images.githubusercontent.com/7277662/109263293-e0d97400-77b7-11eb-9a6a-70537141fdbf.png"> 
+  <img width="280" alt="Screen Shot 2020-03-03 at 1 22 57 PM" src="https://user-images.githubusercontent.com/7277662/109263297-e20aa100-77b7-11eb-9204-5f061441a471.png"> 
+  <img width="280" alt="Screen Shot 2020-03-03 at 1 22 57 PM" src="https://user-images.githubusercontent.com/7277662/109263299-e33bce00-77b7-11eb-87dd-2ed445dfe076.png"> 
+  <img width="280" alt="Screen Shot 2020-03-03 at 1 22 57 PM" src="https://user-images.githubusercontent.com/7277662/109263304-e3d46480-77b7-11eb-907e-cd7d04bf334a.png"> 
+  <img width="280" alt="Screen Shot 2020-03-03 at 1 22 57 PM" src="https://user-images.githubusercontent.com/7277662/109263306-e46cfb00-77b7-11eb-8f2a-3a42fd85ac5a.png"> 
+  <img width="280" alt="Screen Shot 2020-03-03 at 1 22 57 PM" src="https://user-images.githubusercontent.com/7277662/109263309-e46cfb00-77b7-11eb-9b37-7cf73ecce2b6.png"> 
+  <img width="280" alt="Screen Shot 2020-03-03 at 1 22 57 PM" src="hhttps://user-images.githubusercontent.com/7277662/109263311-e5059180-77b7-11eb-9226-4a0fe85dba93"> 
+  <img width="280" alt="Screen Shot 2020-03-03 at 1 22 57 PM" src="https://user-images.githubusercontent.com/7277662/109263312-e5059180-77b7-11eb-90b7-5499de64e099.png"> 
+  <img width="280" alt="Screen Shot 2020-03-03 at 1 22 57 PM" src="https://user-images.githubusercontent.com/7277662/109263314-e59e2800-77b7-11eb-8e83-fa98393b6a0a.png"> 
+  <img width="280" alt="Screen Shot 2020-03-03 at 1 22 57 PM" src="https://user-images.githubusercontent.com/7277662/109263317-e636be80-77b7-11eb-807c-d1be0fce79bd.png"> 
 </p>
