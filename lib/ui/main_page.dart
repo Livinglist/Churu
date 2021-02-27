@@ -35,9 +35,16 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
 
-    BillBloc.instance.init();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Timer(Duration(milliseconds: 300), () {
+        if(scrollController.position.maxScrollExtent >= 240) {
+          scrollController.animateTo(240, duration: Duration(milliseconds: 300),
+              curve: SpringCurve.underDamped);
+        }
+      });
+    });
 
-    AppReview.requestReview;
+    BillBloc.instance.init();
   }
 
   @override
@@ -649,6 +656,7 @@ class _MainPageState extends State<MainPage> {
                           BillBloc.instance.addTransaction(t);
                           Navigator.pop(context);
                           textEditingController.clear();
+                          AppReview.requestReview;
                         },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40),
