@@ -36,8 +36,8 @@ class _MainPageState extends State<MainPage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Timer(Duration(milliseconds: 300), () {
-        if (scrollController.position.maxScrollExtent >= 240) {
+      Timer(Duration(milliseconds: 600), () {
+        if (scrollController.hasClients && scrollController.position.maxScrollExtent >= 240) {
           scrollController.animateTo(240, duration: Duration(milliseconds: 300), curve: SpringCurve.underDamped);
         }
       });
@@ -653,6 +653,7 @@ class _MainPageState extends State<MainPage> {
                           child: Text('入账', style: TextStyle(fontSize: 24, fontFamily: 'noto')),
                         ),
                         style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40),
                           ),
@@ -755,6 +756,7 @@ class _MainPageState extends State<MainPage> {
                           child: Text('出账', style: TextStyle(fontSize: 24, fontFamily: 'noto')),
                         ),
                         style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40),
                           ),
