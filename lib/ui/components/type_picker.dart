@@ -37,7 +37,7 @@ class _TypePickerState extends State<TypePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
         onPressed: () {
           if (_pageController.page == 4) {
             _pageController.jumpToPage(0);
@@ -46,6 +46,10 @@ class _TypePickerState extends State<TypePicker> {
                 duration: Duration(milliseconds: 150), curve: Curves.bounceIn);
           }
         },
+        style: OutlinedButton.styleFrom(
+            backgroundColor: Colors.white,
+            shape: CircleBorder()
+        ),
         child: Padding(
             padding: EdgeInsets.all(12),
             child: Container(
@@ -97,9 +101,7 @@ class _TypePickerState extends State<TypePicker> {
                               fontWeight: FontWeight.bold)),
                     ],
                   ),
-                ))),
-        color: Colors.white,
-        shape: CircleBorder());
+                ))));
   }
 
   void saveCurrentPage(int index) async {

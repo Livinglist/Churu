@@ -37,9 +37,8 @@ class _MainPageState extends State<MainPage> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Timer(Duration(milliseconds: 300), () {
-        if(scrollController.position.maxScrollExtent >= 240) {
-          scrollController.animateTo(240, duration: Duration(milliseconds: 300),
-              curve: SpringCurve.underDamped);
+        if (scrollController.position.maxScrollExtent >= 240) {
+          scrollController.animateTo(240, duration: Duration(milliseconds: 300), curve: SpringCurve.underDamped);
         }
       });
     });
@@ -132,7 +131,9 @@ class _MainPageState extends State<MainPage> {
                       return value + element;
                     });
 
-                    String totalStr = total.abs().toCommaString(), totalOutStr = totalOut.abs().toCommaString(), totalInStr = totalIn.toCommaString();
+                    String totalStr = total.abs().toCommaString(),
+                        totalOutStr = totalOut.abs().toCommaString(),
+                        totalInStr = totalIn.toCommaString();
 
                     double mainSizeFactor = 1 + ((10 - totalStr.length) / 10);
                     double subSizeFactor = 1 + ((12 - (totalInStr.length + totalOutStr.length)) / 12);
@@ -204,45 +205,43 @@ class _MainPageState extends State<MainPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    RaisedButton(
-                        onPressed: outgoingPressed,
-                        child: Padding(
-                          padding: EdgeInsets.all(12),
-                          child: Text('出', style: TextStyle(fontFamily: 'noto', fontSize: 24, fontWeight: FontWeight.bold)),
-                        ),
-                        color: Colors.white,
-                        shape: CircleBorder()),
-                    RaisedButton(
-                        onPressed: incomePressed,
-                        child: Padding(
-                          padding: EdgeInsets.all(12),
-                          child: Text('入', style: TextStyle(fontFamily: 'noto', fontSize: 24, fontWeight: FontWeight.bold)),
-                        ),
-                        color: Colors.white,
-                        shape: CircleBorder()),
+                    ElevatedButton(
+                      onPressed: outgoingPressed,
+                      style: OutlinedButton.styleFrom(backgroundColor: Colors.white, shape: CircleBorder()),
+                      child: Padding(
+                        padding: EdgeInsets.all(12),
+                        child: Text('出', style: TextStyle(fontFamily: 'noto', fontSize: 24, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: incomePressed,
+                      style: OutlinedButton.styleFrom(backgroundColor: Colors.white, shape: CircleBorder()),
+                      child: Padding(
+                        padding: EdgeInsets.all(12),
+                        child: Text('入', style: TextStyle(fontFamily: 'noto', fontSize: 24, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
                     FutureBuilder(
-                      future: getCurrentPage(),
-                      builder: (_, AsyncSnapshot<int> snapshot) {
-                        if(snapshot.hasData) {
-                          var curPage = snapshot.data;
+                        future: getCurrentPage(),
+                        builder: (_, AsyncSnapshot<int> snapshot) {
+                          if (snapshot.hasData) {
+                            var curPage = snapshot.data;
 
-                          return TypePicker(initialPage: curPage, onTypeChanged: (type){
-                            setState(() {
-                              this.displayType = type;
-                            });
-                          },);
-                        }
+                            return TypePicker(
+                              initialPage: curPage,
+                              onTypeChanged: (type) {
+                                setState(() {
+                                  this.displayType = type;
+                                });
+                              },
+                            );
+                          }
 
-                        return RaisedButton(
-                            child: Padding(
-                                padding: EdgeInsets.all(12),
-                                child: Container(
-                                    height: 36,
-                                    width: 36)),
-                            color: Colors.white,
-                            shape: CircleBorder());
-                      }
-                    )
+                          return ElevatedButton(
+                              child: Padding(padding: EdgeInsets.all(12), child: Container(height: 36, width: 36)),
+                              style: OutlinedButton.styleFrom(backgroundColor: Colors.white, shape: CircleBorder()),
+                              onPressed: null);
+                        })
                   ],
                 ),
               ),
@@ -296,7 +295,8 @@ class _MainPageState extends State<MainPage> {
             color: Colors.redAccent,
           ),
           child: ListTile(
-            title: Text('${e.amount < 0 ? '出' : '入'}¥${e.amount.abs().toCommaString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
+            title: Text('${e.amount < 0 ? '出' : '入'}¥${e.amount.abs().toCommaString()}',
+                style: TextStyle(fontSize: 24, color: foregroundColor)),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -576,6 +576,8 @@ class _MainPageState extends State<MainPage> {
 
       return children;
     }
+
+    return [];
   }
 
   void incomePressed() {
@@ -616,7 +618,7 @@ class _MainPageState extends State<MainPage> {
                     keyboardType: TextInputType.numberWithOptions(decimal: true),
                     keyboardAppearance: MediaQuery.of(context).platformBrightness,
                     maxLength: 16,
-                    maxLengthEnforced: true,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     inputFormatters: [CurrencyInputFormatter()],
                   ),
                 ),
@@ -645,22 +647,25 @@ class _MainPageState extends State<MainPage> {
                     padding: EdgeInsets.only(top: 12, left: 24, right: 24),
                     child: Material(
                       color: Colors.transparent,
-                      child: RaisedButton(
+                      child: ElevatedButton(
                         child: Padding(
                           padding: EdgeInsets.only(top: 12, left: 24, right: 24, bottom: 12),
                           child: Text('入账', style: TextStyle(fontSize: 24, fontFamily: 'noto')),
                         ),
+                        style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                        ),
                         onPressed: () {
                           print("the text editing value is ${double.parse(textEditingController.text.replaceAll(',', ''))}");
-                          var t = Transaction.create(amount: double.parse(textEditingController.text.replaceAll(',', '')), transactionType: type);
+                          var t = Transaction.create(
+                              amount: double.parse(textEditingController.text.replaceAll(',', '')), transactionType: type);
                           BillBloc.instance.addTransaction(t);
                           Navigator.pop(context);
                           textEditingController.clear();
                           AppReview.requestReview;
                         },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
-                        ),
                       ),
                     ))
               ],
@@ -715,7 +720,7 @@ class _MainPageState extends State<MainPage> {
                     keyboardType: TextInputType.numberWithOptions(decimal: true),
                     keyboardAppearance: MediaQuery.of(context).platformBrightness,
                     maxLength: 16,
-                    maxLengthEnforced: true,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     inputFormatters: [CurrencyInputFormatter()],
                   ),
                 ),
@@ -744,20 +749,23 @@ class _MainPageState extends State<MainPage> {
                     padding: EdgeInsets.only(top: 12, left: 24, right: 24),
                     child: Material(
                       color: Colors.transparent,
-                      child: RaisedButton(
+                      child: ElevatedButton(
                         child: Padding(
                           padding: EdgeInsets.only(top: 12, left: 24, right: 24, bottom: 12),
                           child: Text('出账', style: TextStyle(fontSize: 24, fontFamily: 'noto')),
                         ),
+                        style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                        ),
                         onPressed: () {
-                          var t = Transaction.create(amount: -double.parse(textEditingController.text.replaceAll(',', '')), transactionType: type);
+                          var t = Transaction.create(
+                              amount: -double.parse(textEditingController.text.replaceAll(',', '')), transactionType: type);
                           BillBloc.instance.addTransaction(t);
                           Navigator.pop(context);
                           textEditingController.clear();
                         },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
-                        ),
                       ),
                     ))
               ],

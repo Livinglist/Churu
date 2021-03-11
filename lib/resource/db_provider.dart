@@ -81,7 +81,6 @@ class DBProvider {
     var table = await db.rawQuery('SELECT MAX(Id)+1 as Id FROM Transactions');
     int id = table.first['Id'];
     transaction.id = id;
-    var map = transaction.toMap();
     return db.insert('Transactions', transaction.toMap());
 //    await db.rawInsert(
 //        'INSERT Into Routines (Id, RoutineName, MainPart, Parts, LastCompletedDate, CreatedDate, Count, RoutineHistory, Weekdays) VALUES (?,?,?,?,?,?,?,?,?)',
