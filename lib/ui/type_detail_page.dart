@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 
-import 'package:innout/util/helpers.dart';
 import 'package:innout/bloc/bill_bloc.dart';
 
 const String noto = 'noto';
@@ -103,7 +103,8 @@ class _TypeDetailPageState extends State<TypeDetailPage> {
               color: Colors.redAccent,
             ),
             child: ListTile(
-              title: Text('${e.amount < 0 ? '出' : '入'}¥${e.amount.abs().toCommaString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
+              title: Text('${e.amount < 0 ? '出' : '入'}¥${e.amount.abs().toCurrencyString()}',
+                  style: TextStyle(fontSize: 24, color: foregroundColor)),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

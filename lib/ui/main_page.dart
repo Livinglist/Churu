@@ -5,16 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:app_review/app_review.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:innout/model/display_type.dart';
 import 'package:innout/bloc/bill_bloc.dart';
 import 'package:innout/ui/components/type_picker.dart';
 import 'package:innout/ui/type_detail_page.dart';
-
-import 'package:innout/util/currency_input_formatter.dart';
-import 'package:innout/util/helpers.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'components/spring_curve.dart';
 
 const String noto = 'noto';
@@ -132,9 +129,9 @@ class _MainPageState extends State<MainPage> {
                       return value + element;
                     });
 
-                    String totalStr = total.abs().toCommaString(),
-                        totalOutStr = totalOut.abs().toCommaString(),
-                        totalInStr = totalIn.toCommaString();
+                    String totalStr = total.abs().toCurrencyString(),
+                        totalOutStr = totalOut.abs().toCurrencyString(),
+                        totalInStr = totalIn.toCurrencyString();
 
                     double mainSizeFactor = 1 + ((10 - totalStr.length) / 10);
                     double subSizeFactor = 1 + ((20 - (totalInStr.length + totalOutStr.length)) / 20);
@@ -159,13 +156,15 @@ class _MainPageState extends State<MainPage> {
                                     Container(
                                         width: MediaQuery.of(context).size.width,
                                         child: Center(
+                                            child: Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: 12),
                                           child: AutoSizeText(
                                             '${total < 0 ? '-' : ''}¥$totalStr',
                                             style: TextStyle(fontSize: 58, color: foregroundColor),
                                             maxFontSize: 58,
                                             maxLines: 1,
                                           ),
-                                        ))
+                                        )))
                                   ],
                                 ),
                                 SizedBox(
@@ -176,22 +175,66 @@ class _MainPageState extends State<MainPage> {
                                   children: <Widget>[
                                     Container(
                                       width: MediaQuery.of(context).size.width,
-                                      child: Center(
-                                        child: AutoSizeText(
-                                          '总入¥$totalInStr',
-                                          style: TextStyle(fontSize: 30, color: foregroundColor),
-                                          maxLines: 1,
-                                        ),
+                                      child: Flex(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        direction: Axis.horizontal,
+                                        children: [
+                                          Expanded(
+                                              flex: 1,
+                                              child: Center(
+                                                child: Text(
+                                                  '总入',
+                                                  style: TextStyle(fontSize: 24, color: foregroundColor),
+                                                ),
+                                              )),
+                                          Expanded(
+                                              flex: 1,
+                                              child: Center(
+                                                child: Text(
+                                                  '总出',
+                                                  style: TextStyle(fontSize: 24, color: foregroundColor),
+                                                ),
+                                              )),
+                                        ],
                                       ),
                                     ),
                                     Container(
                                       width: MediaQuery.of(context).size.width,
-                                      child: Center(
-                                        child: AutoSizeText(
-                                          '总出¥$totalOutStr',
-                                          style: TextStyle(fontSize: 30, color: foregroundColor),
-                                          maxLines: 1,
-                                        ),
+                                      child: Flex(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        direction: Axis.horizontal,
+                                        children: [
+                                          Expanded(
+                                            flex: 1,
+                                            child: Container(
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              child: Center(
+                                                  child: Padding(
+                                                padding: EdgeInsets.symmetric(horizontal: 12),
+                                                child: AutoSizeText(
+                                                  '¥$totalInStr',
+                                                  style: TextStyle(fontSize: 30, color: foregroundColor),
+                                                  maxLines: 1,
+                                                ),
+                                              )),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Container(
+                                              width: MediaQuery.of(context).size.width / 2,
+                                              child: Center(
+                                                  child: Padding(
+                                                padding: EdgeInsets.symmetric(horizontal: 12),
+                                                child: AutoSizeText(
+                                                  '¥$totalOutStr',
+                                                  style: TextStyle(fontSize: 30, color: foregroundColor),
+                                                  maxLines: 1,
+                                                ),
+                                              )),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -311,7 +354,7 @@ class _MainPageState extends State<MainPage> {
             color: Colors.redAccent,
           ),
           child: ListTile(
-            title: Text('${e.amount < 0 ? '出' : '入'}¥${e.amount.abs().toCommaString()}',
+            title: Text('${e.amount < 0 ? '出' : '入'}¥${e.amount.abs().toCurrencyString()}',
                 style: TextStyle(fontSize: 24, color: foregroundColor)),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -364,7 +407,7 @@ class _MainPageState extends State<MainPage> {
         });
 
         return ListTile(
-          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCommaString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
+          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCurrencyString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
           subtitle: Text(
             '${d.year}年${d.month}月${d.day}日',
             style: TextStyle(color: subForegroundColor),
@@ -376,11 +419,11 @@ class _MainPageState extends State<MainPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  '日出¥${totalOut.abs().toCommaString()}',
+                  '日出¥${totalOut.abs().toCurrencyString()}',
                   style: TextStyle(color: subForegroundColor),
                 ),
                 Text(
-                  '日入¥${totalIn.abs().toCommaString()}',
+                  '日入¥${totalIn.abs().toCurrencyString()}',
                   style: TextStyle(color: subForegroundColor),
                 ),
               ],
@@ -423,7 +466,7 @@ class _MainPageState extends State<MainPage> {
         });
 
         return ListTile(
-          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCommaString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
+          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCurrencyString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
           subtitle: Text(
             '${d.year}年${d.month}月',
             style: TextStyle(color: subForegroundColor),
@@ -435,11 +478,11 @@ class _MainPageState extends State<MainPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  '月出¥${totalOut.abs().toCommaString()}',
+                  '月出¥${totalOut.abs().toCurrencyString()}',
                   style: TextStyle(color: subForegroundColor),
                 ),
                 Text(
-                  '月入¥${totalIn.abs().toCommaString()}',
+                  '月入¥${totalIn.abs().toCurrencyString()}',
                   style: TextStyle(color: subForegroundColor),
                 ),
               ],
@@ -482,7 +525,7 @@ class _MainPageState extends State<MainPage> {
         });
 
         return ListTile(
-          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCommaString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
+          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCurrencyString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
           subtitle: Text(
             '${d.year}年',
             style: TextStyle(color: subForegroundColor),
@@ -494,11 +537,11 @@ class _MainPageState extends State<MainPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  '年出¥${totalOut.abs().toCommaString()}',
+                  '年出¥${totalOut.abs().toCurrencyString()}',
                   style: TextStyle(color: subForegroundColor),
                 ),
                 Text(
-                  '年入¥${totalIn.abs().toCommaString()}',
+                  '年入¥${totalIn.abs().toCurrencyString()}',
                   style: TextStyle(color: subForegroundColor),
                 ),
               ],
@@ -554,11 +597,11 @@ class _MainPageState extends State<MainPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                '总出¥${totalOut.abs().toCommaString()}',
+                '总出¥${totalOut.abs().toCurrencyString()}',
                 style: TextStyle(color: subForegroundColor),
               ),
               Text(
-                '总入¥${totalIn.abs().toCommaString()}',
+                '总入¥${totalIn.abs().toCurrencyString()}',
                 style: TextStyle(color: subForegroundColor),
               ),
             ],
@@ -620,7 +663,7 @@ class _MainPageState extends State<MainPage> {
                     keyboardAppearance: MediaQuery.of(context).platformBrightness,
                     maxLength: 16,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    inputFormatters: [CurrencyInputFormatter()],
+                    inputFormatters: [MoneyInputFormatter()],
                   ),
                 ),
                 Padding(
@@ -723,7 +766,7 @@ class _MainPageState extends State<MainPage> {
                     keyboardAppearance: MediaQuery.of(context).platformBrightness,
                     maxLength: 16,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    inputFormatters: [CurrencyInputFormatter()],
+                    inputFormatters: [MoneyInputFormatter()],
                   ),
                 ),
                 Padding(
