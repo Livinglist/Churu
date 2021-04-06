@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:innout/ui/components/spring_curve.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:innout/model/display_type.dart';
@@ -17,19 +18,13 @@ class _TypePickerState extends State<TypePicker> {
   PageController _pageController;
   DisplayType displayType = DisplayType.day;
   String buttonStr = "日";
-  List<DisplayType> types = [
-    DisplayType.day,
-    DisplayType.month,
-    DisplayType.year,
-    DisplayType.category,
-    DisplayType.single
-  ];
+  List<DisplayType> types = [DisplayType.day, DisplayType.month, DisplayType.year, DisplayType.category, DisplayType.single];
 
   @override
   void initState() {
     _pageController = PageController(initialPage: widget.initialPage);
     displayType = widget.initialPage == 0 ? DisplayType.single : types.elementAt(widget.initialPage - 1);
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.onTypeChanged(displayType);
     });
     super.initState();
@@ -42,14 +37,11 @@ class _TypePickerState extends State<TypePicker> {
           if (_pageController.page == 4) {
             _pageController.jumpToPage(0);
           } else {
-            _pageController.nextPage(
-                duration: Duration(milliseconds: 150), curve: Curves.bounceIn);
+            _pageController.animateToPage(_pageController.page.ceil() + 1,
+                duration: Duration(milliseconds: 200), curve: SpringCurve.underDamped);
           }
         },
-        style: OutlinedButton.styleFrom(
-            backgroundColor: Colors.white,
-            shape: CircleBorder()
-        ),
+        style: OutlinedButton.styleFrom(backgroundColor: Colors.white, shape: CircleBorder()),
         child: Padding(
             padding: EdgeInsets.all(12),
             child: Container(
@@ -70,35 +62,15 @@ class _TypePickerState extends State<TypePicker> {
                     },
                     children: [
                       Text("日",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'noto',
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold)),
+                          textAlign: TextAlign.center, style: TextStyle(fontFamily: 'noto', fontSize: 24, fontWeight: FontWeight.bold)),
                       Text("月",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'noto',
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold)),
+                          textAlign: TextAlign.center, style: TextStyle(fontFamily: 'noto', fontSize: 24, fontWeight: FontWeight.bold)),
                       Text("年",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'noto',
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold)),
+                          textAlign: TextAlign.center, style: TextStyle(fontFamily: 'noto', fontSize: 24, fontWeight: FontWeight.bold)),
                       Text("类",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'noto',
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold)),
+                          textAlign: TextAlign.center, style: TextStyle(fontFamily: 'noto', fontSize: 24, fontWeight: FontWeight.bold)),
                       Text("次",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'noto',
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold)),
+                          textAlign: TextAlign.center, style: TextStyle(fontFamily: 'noto', fontSize: 24, fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ))));
@@ -107,5 +79,4 @@ class _TypePickerState extends State<TypePicker> {
   void saveCurrentPage(int index) async {
     SharedPreferences.getInstance().then((value) => value.setInt("lastVisitedPage", index));
   }
-
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -136,7 +137,7 @@ class _MainPageState extends State<MainPage> {
                         totalInStr = totalIn.toCommaString();
 
                     double mainSizeFactor = 1 + ((10 - totalStr.length) / 10);
-                    double subSizeFactor = 1 + ((12 - (totalInStr.length + totalOutStr.length)) / 12);
+                    double subSizeFactor = 1 + ((20 - (totalInStr.length + totalOutStr.length)) / 20);
 
                     print('the size is ' + subSizeFactor.toString());
 
@@ -155,28 +156,43 @@ class _MainPageState extends State<MainPage> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Text(
-                                      '${total < 0 ? '-' : ''}¥$totalStr',
-                                      style: TextStyle(fontSize: 64, color: foregroundColor),
-                                      textScaleFactor: mainSizeFactor,
-                                    )
+                                    Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        child: Center(
+                                          child: AutoSizeText(
+                                            '${total < 0 ? '-' : ''}¥$totalStr',
+                                            style: TextStyle(fontSize: 58, color: foregroundColor),
+                                            maxFontSize: 58,
+                                            maxLines: 1,
+                                          ),
+                                        ))
                                   ],
                                 ),
                                 SizedBox(
                                   height: 24,
                                 ),
-                                Row(
+                                Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    Text(
-                                      '总入¥$totalInStr',
-                                      style: TextStyle(fontSize: 30, color: foregroundColor),
-                                      textScaleFactor: subSizeFactor,
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Center(
+                                        child: AutoSizeText(
+                                          '总入¥$totalInStr',
+                                          style: TextStyle(fontSize: 30, color: foregroundColor),
+                                          maxLines: 1,
+                                        ),
+                                      ),
                                     ),
-                                    Text(
-                                      '总出¥$totalOutStr',
-                                      style: TextStyle(fontSize: 30, color: foregroundColor),
-                                      textScaleFactor: subSizeFactor,
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Center(
+                                        child: AutoSizeText(
+                                          '总出¥$totalOutStr',
+                                          style: TextStyle(fontSize: 30, color: foregroundColor),
+                                          maxLines: 1,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -348,32 +364,27 @@ class _MainPageState extends State<MainPage> {
         });
 
         return ListTile(
-          title: Row(
-            children: <Widget>[
-              Text('${total < 0 ? '出' : '入'}¥${total.abs().toCommaString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
-              Spacer(),
-              Container(
-                width: 140,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      '日出¥${totalOut.abs().toCommaString()}',
-                      style: TextStyle(color: subForegroundColor),
-                    ),
-                    Text(
-                      '日入¥${totalIn.abs().toCommaString()}',
-                      style: TextStyle(color: subForegroundColor),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCommaString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
           subtitle: Text(
             '${d.year}年${d.month}月${d.day}日',
             style: TextStyle(color: subForegroundColor),
+          ),
+          trailing: Container(
+            width: 140,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  '日出¥${totalOut.abs().toCommaString()}',
+                  style: TextStyle(color: subForegroundColor),
+                ),
+                Text(
+                  '日入¥${totalIn.abs().toCommaString()}',
+                  style: TextStyle(color: subForegroundColor),
+                ),
+              ],
+            ),
           ),
           onTap: () {},
         );
@@ -412,32 +423,27 @@ class _MainPageState extends State<MainPage> {
         });
 
         return ListTile(
-          title: Row(
-            children: <Widget>[
-              Text('${total < 0 ? '出' : '入'}¥${total.abs().toCommaString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
-              Spacer(),
-              Container(
-                width: 140,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      '月出¥${totalOut.abs().toCommaString()}',
-                      style: TextStyle(color: subForegroundColor),
-                    ),
-                    Text(
-                      '月入¥${totalIn.abs().toCommaString()}',
-                      style: TextStyle(color: subForegroundColor),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCommaString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
           subtitle: Text(
             '${d.year}年${d.month}月',
             style: TextStyle(color: subForegroundColor),
+          ),
+          trailing: Container(
+            width: 140,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  '月出¥${totalOut.abs().toCommaString()}',
+                  style: TextStyle(color: subForegroundColor),
+                ),
+                Text(
+                  '月入¥${totalIn.abs().toCommaString()}',
+                  style: TextStyle(color: subForegroundColor),
+                ),
+              ],
+            ),
           ),
           onTap: () {},
         );
@@ -476,32 +482,27 @@ class _MainPageState extends State<MainPage> {
         });
 
         return ListTile(
-          title: Row(
-            children: <Widget>[
-              Text('${total < 0 ? '出' : '入'}¥${total.abs().toCommaString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
-              Spacer(),
-              Container(
-                width: 140,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      '年出¥${totalOut.abs().toCommaString()}',
-                      style: TextStyle(color: subForegroundColor),
-                    ),
-                    Text(
-                      '年入¥${totalIn.abs().toCommaString()}',
-                      style: TextStyle(color: subForegroundColor),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCommaString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
           subtitle: Text(
             '${d.year}年',
             style: TextStyle(color: subForegroundColor),
+          ),
+          trailing: Container(
+            width: 140,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  '年出¥${totalOut.abs().toCommaString()}',
+                  style: TextStyle(color: subForegroundColor),
+                ),
+                Text(
+                  '年入¥${totalIn.abs().toCommaString()}',
+                  style: TextStyle(color: subForegroundColor),
+                ),
+              ],
+            ),
           ),
           onTap: () {},
         );
