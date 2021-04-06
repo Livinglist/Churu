@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:intl/intl.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -657,13 +659,12 @@ class _MainPageState extends State<MainPage> {
                           style: TextStyle(fontSize: 36),
                         )),
                     style: TextStyle(fontSize: 36, fontFamily: 'noto'),
-                    smartQuotesType: SmartQuotesType.enabled,
                     decoration: BoxDecoration(color: Colors.transparent),
                     keyboardType: TextInputType.numberWithOptions(decimal: true),
                     keyboardAppearance: MediaQuery.of(context).platformBrightness,
                     maxLength: 16,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    inputFormatters: [MoneyInputFormatter()],
+                    inputFormatters: [CurrencyTextInputFormatter(symbol: '')],
                   ),
                 ),
                 Padding(
@@ -766,7 +767,7 @@ class _MainPageState extends State<MainPage> {
                     keyboardAppearance: MediaQuery.of(context).platformBrightness,
                     maxLength: 16,
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    inputFormatters: [MoneyInputFormatter()],
+                    inputFormatters: [CurrencyTextInputFormatter(symbol: '')],
                   ),
                 ),
                 Padding(
