@@ -357,7 +357,7 @@ class _MainPageState extends State<MainPage> {
           ),
           child: ListTile(
             title: Text('${e.amount < 0 ? '出' : '入'}¥${e.amount.abs().toCurrencyString()}',
-                style: TextStyle(fontSize: 24, color: foregroundColor)),
+                style: TextStyle(fontSize: 20, color: foregroundColor)),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -409,7 +409,12 @@ class _MainPageState extends State<MainPage> {
         });
 
         return ListTile(
-          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCurrencyString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
+          title: AutoSizeText(
+            '${total < 0 ? '出' : '入'}¥${total.abs().toCurrencyString()}',
+            style: TextStyle(fontSize: 20, color: foregroundColor),
+            maxLines: 1,
+            maxFontSize: 20,
+          ),
           subtitle: Text(
             '${d.year}年${d.month}月${d.day}日',
             style: TextStyle(color: subForegroundColor),
@@ -420,13 +425,15 @@ class _MainPageState extends State<MainPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
+                AutoSizeText(
                   '日出¥${totalOut.abs().toCurrencyString()}',
                   style: TextStyle(color: subForegroundColor),
+                  maxLines: 1,
                 ),
-                Text(
+                AutoSizeText(
                   '日入¥${totalIn.abs().toCurrencyString()}',
                   style: TextStyle(color: subForegroundColor),
+                  maxLines: 1,
                 ),
               ],
             ),
@@ -468,7 +475,12 @@ class _MainPageState extends State<MainPage> {
         });
 
         return ListTile(
-          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCurrencyString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
+          title: AutoSizeText(
+            '${total < 0 ? '出' : '入'}¥${total.abs().toCurrencyString()}',
+            style: TextStyle(fontSize: 20, color: foregroundColor),
+            maxLines: 1,
+            maxFontSize: 20,
+          ),
           subtitle: Text(
             '${d.year}年${d.month}月',
             style: TextStyle(color: subForegroundColor),
@@ -479,14 +491,8 @@ class _MainPageState extends State<MainPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  '月出¥${totalOut.abs().toCurrencyString()}',
-                  style: TextStyle(color: subForegroundColor),
-                ),
-                Text(
-                  '月入¥${totalIn.abs().toCurrencyString()}',
-                  style: TextStyle(color: subForegroundColor),
-                ),
+                AutoSizeText('月出¥${totalOut.abs().toCurrencyString()}', style: TextStyle(color: subForegroundColor), maxLines: 1),
+                AutoSizeText('月入¥${totalIn.abs().toCurrencyString()}', style: TextStyle(color: subForegroundColor), maxLines: 1),
               ],
             ),
           ),
@@ -527,7 +533,12 @@ class _MainPageState extends State<MainPage> {
         });
 
         return ListTile(
-          title: Text('${total < 0 ? '出' : '入'}¥${total.abs().toCurrencyString()}', style: TextStyle(fontSize: 24, color: foregroundColor)),
+          title: AutoSizeText(
+            '${total < 0 ? '出' : '入'}¥${total.abs().toCurrencyString()}',
+            style: TextStyle(fontSize: 20, color: foregroundColor),
+            maxLines: 1,
+            maxFontSize: 20,
+          ),
           subtitle: Text(
             '${d.year}年',
             style: TextStyle(color: subForegroundColor),
@@ -538,14 +549,8 @@ class _MainPageState extends State<MainPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  '年出¥${totalOut.abs().toCurrencyString()}',
-                  style: TextStyle(color: subForegroundColor),
-                ),
-                Text(
-                  '年入¥${totalIn.abs().toCurrencyString()}',
-                  style: TextStyle(color: subForegroundColor),
-                ),
+                AutoSizeText('年出¥${totalOut.abs().toCurrencyString()}', style: TextStyle(color: subForegroundColor), maxLines: 1),
+                AutoSizeText('年入¥${totalIn.abs().toCurrencyString()}', style: TextStyle(color: subForegroundColor), maxLines: 1),
               ],
             ),
           ),
